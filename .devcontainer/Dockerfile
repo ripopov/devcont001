@@ -13,9 +13,11 @@ RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
 # [Optional] Uncomment this section to install additional vcpkg ports.
 # RUN su vscode -c "${VCPKG_ROOT}/vcpkg install <your-port-name-here>"
 
-# [Optional] Uncomment this section to install additional packages.
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-     && apt-get -y install --no-install-recommends python-pip
 
-RUN pip3 install pandas
+RUN set -xe && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update -y \
+    && apt-get install -y python3-pip
+
+RUN pip install --upgrade pip
+RUN pip install pandas
 # RUN pip3 install numpy
